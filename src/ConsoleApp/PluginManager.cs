@@ -7,6 +7,8 @@ namespace ConsoleApp
         private Type pluginType;
         private ConcurrentDictionary<Guid, PluginContext> plugins;
 
+        public IEnumerable<Guid> Plugins { get => plugins.Keys.ToArray(); }
+
         public PluginManager()
         {
             pluginType = typeof(TPluginType);

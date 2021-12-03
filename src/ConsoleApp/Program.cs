@@ -18,12 +18,17 @@ Console.WriteLine();
 foreach(var pluginFolder in pluginFolders)
     manager.Load(pluginFolder);
 
-Console.WriteLine("--- After folders loaded ---");
+Console.WriteLine("--- folders loaded ---");
 foreach (var plugin in manager.GetImplementations())
     plugin.PrintData();
 
 Console.WriteLine();
 
+var pluginToUnload = manager.Plugins.FirstOrDefault();
+manager.Unload(pluginToUnload);
 
+Console.WriteLine("--- unloaded plugin ---");
+foreach (var plugin in manager.GetImplementations())
+    plugin.PrintData();
 
 Console.ReadLine();

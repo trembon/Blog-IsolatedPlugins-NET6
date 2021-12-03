@@ -9,7 +9,7 @@ namespace ConsoleApp
 
         public Guid Id { get; }
 
-        public PluginContext(params Type[] sharedTypes)
+        public PluginContext(params Type[] sharedTypes) : base(true)
         {
             Id = Guid.NewGuid();
 
