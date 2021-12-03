@@ -27,6 +27,18 @@ namespace ConsoleApp
             return Guid.Empty;
         }
 
+        public Guid Load(byte[] assembly)
+        {
+            var plugin = new PluginContext(pluginType);
+            if (plugins.TryAdd(plugin.Id, plugin))
+            {
+                plugin.InitializeFromBytes(assembly);
+                return plugin.Id;
+            }
+
+            return Guid.Empty;
+        }
+
         public void Unload(Guid id)
         {
             if (plugins.TryRemove(id, out var plugin))

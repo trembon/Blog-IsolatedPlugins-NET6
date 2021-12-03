@@ -31,6 +31,12 @@ namespace ConsoleApp
             }
         }
 
+        public void InitializeFromBytes(byte[] assembly)
+        {
+            using(var ms = new MemoryStream(assembly))
+                LoadFromStream(ms);
+        }
+
         protected override Assembly Load(AssemblyName assemblyName)
         {
             string filename = $"{assemblyName.Name}.dll";
