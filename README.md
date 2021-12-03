@@ -1,0 +1,1 @@
+# Blog-IsolatedPlugins-NET6
