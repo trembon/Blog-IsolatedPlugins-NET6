@@ -6,7 +6,7 @@ namespace Plugin2
     {
         public void PrintData()
         {
-            System.Console.WriteLine("hello from Plugin2");
+            System.Console.WriteLine($"hello from Plugin2 (Newtonsoft version: {typeof(Newtonsoft.Json.JsonSerializer).Assembly.GetName().Version})");
         }
     }
 }
