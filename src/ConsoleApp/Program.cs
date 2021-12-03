@@ -1,25 +1,29 @@
 ﻿using ConsoleApp;
 using PluginBase;
 
-string[] plugins = new string[]
+string[] pluginFolders = new string[]
 {
-    @"...",
-    @"..."
+    @"..\..\..\..\Plugin1\bin\Debug\netstandard2.1",
+    @"..\..\..\..\Plugin2\bin\Debug\netstandard2.1"
 };
 
-Type pluginType = typeof(IPluginBase);
+var manager = new PluginManager<IPluginBase>();
 
-List<PluginAssemblyLoadContext> contexts = new List<PluginAssemblyLoadContext>();
-foreach (string pluginPath in plugins)
-{
-    PluginAssemblyLoadContext context = new PluginAssemblyLoadContext(pluginPath, pluginType);
-    context.Initialize();
+Console.WriteLine("--- Without plugins ---");
+foreach (var plugin in manager.GetImplementations())
+    plugin.PrintData();
 
-    contexts.Add(context);
-}
+Console.WriteLine();
 
-foreach (var context in contexts)
-    foreach (var plugin in context.GetImplementations<IPluginBase>())
-        plugin.PrintData();
+foreach(var pluginFolder in pluginFolders)
+    manager.Load(pluginFolder);
+
+Console.WriteLine("--- After folders loaded ---");
+foreach (var plugin in manager.GetImplementations())
+    plugin.PrintData();
+
+Console.WriteLine();
+
+
 
 Console.ReadLine();
